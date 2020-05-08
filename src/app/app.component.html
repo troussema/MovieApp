@@ -1,22 +1,7 @@
-<div class="title">
-  <h1> MovieApp </h1>
-</div>
 
-<ng-template #login>
-  <button class="log" (click)="auth.googleSignin()">Login with Google</button>
-  </ng-template>
+<a routerLink="/" >Home</a> &nbsp;
+<a *ngIf="auth.user$ | async " routerLink="/games" >Games</a> &nbsp;
+<a *ngIf="auth.user$ | async " (click)="auth.signOut()">Logout</a>
 
 <router-outlet></router-outlet>
 
-<div class="container">
-  <div>
-    <div *ngIf="auth.user$ | async as user; else login">
-      {{ user | json}}
-      <br>
-      <br>
-      <button class="button" (click)="auth.signOut()">Sign Out</button>
-    </div>
-
-    <p>We are only supporting google login for the moment <span>❤</span> thank you for your understanding.</p>
-  </div>
-</div>
