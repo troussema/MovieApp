@@ -1,0 +1,69 @@
+<!--<router-outlet></router-outlet>-->
+<!--<p>Games works!</p>-->
+
+<div  class="container-fluid" *ngIf="!gamesService.loading">
+  <div class="row"><h1>List of games</h1></div>
+  <div class="row"> <button color="primary" mat-raised-button routerLink="add" >Add Game <mat-icon>add</mat-icon></button>
+    </div>
+  <br>
+  <div class="row">
+  <div  class="example-container mat-elevation-z8" >
+
+    <div class="example-header">
+      <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+      </mat-form-field>
+    </div>
+
+    <mat-table #table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="id">
+<!--        <mat-header-cell *matHeaderCellDef> Id </mat-header-cell>-->
+        <mat-cell *matCellDef="let element"> {{element.key}} </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="title">
+        <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.titleGame}} </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="rating">
+        <mat-header-cell *matHeaderCellDef> Rating </mat-header-cell>
+        <mat-cell *matCellDef="let element"> {{element.ratingGame}}<span><mat-icon>star</mat-icon></span> </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="details">
+        <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+        <mat-cell *matCellDef="let element"> <span class="material-icons" [routerLink]="['details', element.key]">list</span> </mat-cell>
+      </ng-container>
+
+
+      <ng-container matColumnDef="edit">
+        <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+        <mat-cell *matCellDef="let element"> <span class="material-icons" (click)="updateGame(element)">edit</span> </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="delete">
+        <mat-header-cell *matHeaderCellDef>  </mat-header-cell>
+        <mat-cell *matCellDef="let element"> <span class="material-icons" (click)="deleteGame(element)">delete</span> </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+    </mat-table>
+
+    <mat-paginator #paginator
+                   [pageSize]="10"
+                   [pageSizeOptions]="[5, 10, 20]"
+                   [showFirstLastButtons]="true">
+    </mat-paginator>
+
+  </div>
+</div>
+</div>
+
+
+<!--<button (click)="addTest()">ADDDDDDD</button>-->

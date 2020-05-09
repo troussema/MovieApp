@@ -1,0 +1,52 @@
+<div class="container" *ngIf="!gamesService.loading">
+  <div class="row">
+    <div class="col-sm-8">
+    <mat-card class="example-card">
+      <mat-card-header>
+        <mat-card-title>{{game.titleGame}}</mat-card-title>
+        <mat-card-subtitle>Rating: {{ratingStars}} </mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="{{game.imageUrl}}">
+      <mat-card-content>
+        <p>
+          {{game.descriptionGame}}
+        </p>
+      </mat-card-content>
+    </mat-card>
+    </div>
+    <div class="col-sm-4">
+      Comments:
+      <div class="row">
+        <mat-list *ngFor="let comment of comments">
+          {{comment.displayName}}
+          {{comment.date}}
+          <mat-list-item>{{comment.comment}}</mat-list-item>
+          <mat-divider></mat-divider>
+        </mat-list>
+      </div>
+      <div class="row">
+
+        <div  class="form-field">
+          <form [formGroup]="formGroup" (ngSubmit)="onSubmitComment(formGroup.value)" class="form">
+
+            <mat-form-field class="form-element">
+              <mat-label>Comment</mat-label>
+              <textarea matInput placeholder="Please type a comment about this game" formControlName="comment" required></textarea>
+              <mat-error>Please enter a comment!</mat-error>
+            </mat-form-field>
+
+
+            <input formControlName="keyCreator" type="hidden">
+
+            <div class="form-element">
+              <button mat-raised-button color="primary" type="submit" class="button" [disabled]="!formGroup.valid">Comment</button>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row"></div>
+</div>
+<router-outlet></router-outlet>

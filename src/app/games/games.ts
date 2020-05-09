@@ -3,4 +3,5 @@ export class Games {
   titleGame?: string;
   descriptionGame?: string;
   ratingGame?: number;
+  imageUrl?: string;
 }

@@ -1,8 +1,22 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
 
-<a routerLink="/" >Home</a> &nbsp;
-<a *ngIf="auth.user$ | async " routerLink="/games" >Games</a> &nbsp;
-<a *ngIf="auth.user$ | async " (click)="auth.signOut()">Logout</a>
+    <h1>GameApp</h1>
+    <span class="menu-spacer"></span>
+    <div *ngIf="auth.logged">
+      <a *ngIf="auth.user$ | async " mat-button [routerLink]="'/'"> Profile </a>
+      <a *ngIf="auth.user$ | async " mat-button [routerLink]="'/games'"> Games </a>
+      <a *ngIf="auth.user$ | async "  (click)="auth.signOut()" mat-button [routerLink]="'/contacts'"> Logout </a>
+
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>
+
 <mat-progress-bar *ngIf="gamesService.loading" color="primary" mode="indeterminate">
 </mat-progress-bar>
+
+<div *ngIf="this.router.url!=='/'&&this.router.url!=='/login'">
+  <button mat-mini-fab color="primary" routerLink="add" (click)="goBack()"><mat-icon>keyboard_arrow_left</mat-icon></button></div>
+<br>
 <router-outlet></router-outlet>
 

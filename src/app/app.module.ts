@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import { AppComponent } from './app.component';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
@@ -11,6 +11,13 @@ import { AppRoutingModule } from './app-routing.module';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastrModule} from 'ngx-toastr';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatIconModule} from '@angular/material/icon';
+import {MatButtonModule} from '@angular/material/button';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {registerLocaleData} from '@angular/common';
+import localeFr from '@angular/common/locales/fr';
+import {AuthGuardService} from './services/auth-guard.service';
+registerLocaleData(localeFr);
 
 @NgModule({
   declarations: [
@@ -25,10 +32,14 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatProgressBarModule,
-    ToastrModule.forRoot({})
+    ToastrModule.forRoot({}),
+    MatIconModule,
+    MatButtonModule,
+    MatToolbarModule
 
   ],
-  providers: [],
+  providers: [{ provide: LOCALE_ID, useValue: 'fr-FR'},
+    AuthGuardService],
   exports: [
   ],
   bootstrap: [AppComponent]

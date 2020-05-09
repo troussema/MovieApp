@@ -1,0 +1,17 @@
+.mat-column-details {
+  flex: 0 0 100px;
+}
+
+.mat-column-edit {
+  flex: 0 0 100px;
+}
+
+.mat-column-delete {
+  flex: 0 0 100px;
+}
+
+.example-header {
+  min-height: 64px;
+  padding: 8px 24px 0;
+}
+
